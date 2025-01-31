@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cucumber.version>7.14.0</cucumber.version>
+        <cucumber.version>7.20.1</cucumber.version>
         <junit.vintage.version>5.11.4</junit.vintage.version>
         <cucumber-extentsreport.version>1.14.0</cucumber-extentsreport.version>
     </properties>
