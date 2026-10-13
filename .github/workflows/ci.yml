@@ -27,8 +27,9 @@ jobs:
         id: run-tests
         run: |
           set +e
-          mvn test 2>&1 | tee test-output.txt
-          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          set -o pipefail
+          mvn -B test 2>&1 | tee test-output.txt
+          echo "exitcode=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
       - name: Post test summary as PR comment
         if: github.event_name == 'pull_request'
@@ -59,3 +60,7 @@ jobs:
               repo: context.repo.repo,
               body: summary
             });
+
+      - name: Fail job if tests failed
+        if: always() && steps.run-tests.outputs.exitcode != '0'
+        run: exit 1
